@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class App {
+public class Day1 {
     public static void main (String[] args) {
         ArrayList<Integer> numList1 = new ArrayList<>(0);
         ArrayList<Integer> numList2 = new ArrayList<>(0);
