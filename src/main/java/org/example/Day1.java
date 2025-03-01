@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.util.AOCFileIO;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,14 +16,11 @@ public class Day1 {
         int totalDifference = 0;
 
         try {
-            // put the copy-pasted input from Adventofcode.com at
-            //      /home/$USER/Desktop/aoc.txt
-            String nam = System.getProperty("user.name");
-            Path path = Paths.get("/home/", nam, "/Desktop/aoc.txt");
-            String content = new String(Files.readAllBytes(path));
+            String content = AOCFileIO.parseFile("aoc1.txt");
             allNums = content.split(" {3}|\n");
         } catch (IOException e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
+            System.exit(1);
         }
 
         for (int i = 0; i < allNums.length; i++) {
