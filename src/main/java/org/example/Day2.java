@@ -9,15 +9,11 @@ import java.util.HashMap;
 
 public class Day2 {
     public static void main(String[] args) {
-        String content = "";
+        String content;
         ArrayList<ArrayList<Integer>> organizedReports = new ArrayList<>();
         
-        try {
-            content = AOCFileIO.parseFile("aoc2.txt");
-        } catch (IOException e) {
-            System.out.println(Arrays.toString(e.getStackTrace()));
-            System.exit(1);
-        }
+        content = AOCFileIO.parseFile("aoc2.txt");
+        assert content != null;
 //
 //        content = "7 6 4 2 1\n" +
 //                "1 2 7 8 9\n" +
@@ -47,8 +43,6 @@ public class Day2 {
             organizedReports.add(thisOrganizedReport);
         }
         
-        System.out.println((organizedReports.size()));
-        
         // organizedReports is an arraylist of arraylists (the actual reports)
         
         HashMap<Integer, Boolean> hm = new HashMap<>();
@@ -59,7 +53,6 @@ public class Day2 {
             hm.put(i, isSafe(report));
         }
         
-        System.out.println(hm);
         int numThatAreGood = 0;
         for (int i = 0; i < hm.size(); i++) {
             numThatAreGood = hm.get(i) ? numThatAreGood + 1: numThatAreGood;
@@ -108,7 +101,6 @@ public class Day2 {
                     if (i == reportLength - 2) {
                         isValid = true;
                     }
-                    
                 }
                 
                 break;
@@ -134,8 +126,4 @@ public class Day2 {
         
         return isValid;
     }
-    
-    
-    
-    
 }
