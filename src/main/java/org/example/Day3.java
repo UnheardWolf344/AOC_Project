@@ -4,21 +4,28 @@ import org.example.util.AOCFileIO;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import java.util.function.BiFunction;
 import java.util.regex.*;
 
 
 public class Day3 {
     public static void main(String[] args) {
+        int section = 1;
         
         String content = AOCFileIO.parseFile("aoc3.txt");
         assert content != null;
         
         Pattern startPattern = Pattern.compile("mul\\(");
-        Pattern endPattern = Pattern.compile("\\)");
         Matcher startMatcher = startPattern.matcher(content);
+        
+        Pattern endPattern = Pattern.compile("\\)");
         Matcher endMatcher = endPattern.matcher(content);
+        
+        Pattern doPattern = Pattern.compile("do\\(\\)");
+        Matcher doMatcher = doPattern.matcher(content);
+        
+        Pattern dontPattern = Pattern.compile("don't\\(\\)");
+        Matcher dontMatcher = dontPattern.matcher(content);
         
         
         List<String> allMuls = new ArrayList<>();
