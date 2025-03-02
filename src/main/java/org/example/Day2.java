@@ -9,6 +9,8 @@ import java.util.HashMap;
 
 public class Day2 {
     public static void main(String[] args) {
+        int section = 1;
+        
         String content;
         ArrayList<ArrayList<Integer>> organizedReports = new ArrayList<>();
         
@@ -50,7 +52,10 @@ public class Day2 {
         for (int i = 0; i < organizedReports.size(); i++) {
             ArrayList<Integer> report = organizedReports.get(i);
             
-            hm.put(i, isSafe(report));
+            if (section == 1)
+                hm.put(i, isSafe1(report));
+            else if (section == 2)
+                hm.put(i, isSafe2(report));
         }
         
         int numThatAreGood = 0;
@@ -67,7 +72,7 @@ public class Day2 {
         EQUAL
     }
     
-    public static boolean isSafe (ArrayList<Integer> report) {
+    public static boolean isSafe1 (ArrayList<Integer> report) {
         State state;
         boolean isValid = false;
         
@@ -113,6 +118,80 @@ public class Day2 {
                     
                     if (!((currentVal - nextVal) >= 1 && (currentVal - nextVal) <= 3)) {
                         break;
+                    }
+                    
+                    if (i == reportLength - 2) {
+                        isValid = true;
+                    }
+                    
+                }
+                
+                break;
+        }
+        
+        return isValid;
+    }
+    
+    public static boolean isSafe2 (ArrayList<Integer> report) {
+        State state;
+        boolean isValid = false;
+        
+        int errorNum = 0;
+        
+        if (report.get(0) < report.get(1)) {
+            state = State.INCREASING;
+        } else if (report.get(0) > report.get(1)) {
+            state = State.DECREASING;
+        } else  {
+            errorNum++;
+            if (report.get(1) < report.get(2)) {
+                state = State.INCREASING;
+            } else if (report.get(1) > report.get(2)) {
+                state = State.DECREASING;
+            } else {
+                state = State.EQUAL;
+            }
+        }
+        
+        int reportLength = report.size();
+        
+        switch (state) {
+            case EQUAL:
+                break;
+                
+            case INCREASING:
+                
+                //do stuff
+                
+                for (int i = 0; i < reportLength - 1; i++) {
+                    int currentVal = report.get(i);
+                    int nextVal = report.get(i + 1);
+                    
+                    if (!((nextVal - currentVal) >= 1 && (nextVal - currentVal) <= 3)) {
+                        errorNum++;
+                        if (errorNum >= 2) {
+                            break;
+                        }
+                    }
+                    
+                    if (i == reportLength - 2) {
+                        isValid = true;
+                    }
+                }
+                
+                break;
+            case DECREASING:
+                // do stuff
+                
+                for (int i = 0; i < reportLength - 1; i++) {
+                    int currentVal = report.get(i);
+                    int nextVal = report.get(i + 1);
+                    
+                    if (!((currentVal - nextVal) >= 1 && (currentVal - nextVal) <= 3)) {
+                        errorNum++;
+                        if (errorNum >= 2) {
+                            break;
+                        }
                     }
                     
                     if (i == reportLength - 2) {
